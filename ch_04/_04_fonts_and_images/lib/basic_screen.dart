@@ -21,12 +21,18 @@ class BasicScreen extends StatelessWidget {
         ],
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Center(
               child:AspectRatio(
                 aspectRatio: 1.0,
                 child: ImmutableWidget(),
               )
+          ),
+          Semantics(
+            image: true,
+            label: 'Beach image',
+            child: Image.asset('assets/khachik-simonian-nXOB-wh4Oyc-unsplash.jpg'),
           ),
           TextLayout(),
         ],
