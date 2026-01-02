@@ -12,7 +12,7 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-  Future<Position> position;
+  late Future<Position> position;
   String myPosition = '';
 
   @override
