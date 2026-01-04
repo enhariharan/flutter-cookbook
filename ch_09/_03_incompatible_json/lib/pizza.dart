@@ -11,6 +11,4 @@ class Pizza {
       description = json['description'].toString() ?? 'Empty description',
       price = double.tryParse(json['price'].toString()) ?? 0.0,
       imageUrl = json['imageUrl'] ?? '';
-
-  
 }
