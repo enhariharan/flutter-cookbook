@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:_01_store_data/pizza.dart';
-import 'package:flutter/foundation.dart';
+import 'pizza.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -63,13 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
       myPizzas.add(pizza);
     }
 
-    String json = _convertToJson(myPizzas);
-    if (kDebugMode) {
-      print(json);
-    }
-
     return myPizzas;
   }
-
-  String _convertToJson(List<Pizza> pizzas) => jsonEncode(pizzas.map((p) => jsonEncode(p)).toList());
 }
