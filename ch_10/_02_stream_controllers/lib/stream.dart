@@ -32,4 +32,8 @@ class NumberStream {
   void dispose() => _controller.close();
 
   Stream<int> getNumbers() => _controller.stream;
+
+  void addError() {
+    _controller.addError('Something went wrong');
+  }
 }

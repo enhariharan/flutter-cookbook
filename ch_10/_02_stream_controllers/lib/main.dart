@@ -40,7 +40,9 @@ class _StreamDemoHomePageState extends State<StreamDemoHomePage> {
     _numberStream = NumberStream();
     _numberStreamController = _numberStream.controller;
     Stream stream = _numberStreamController.stream;
-    stream.listen((event) => setState(() => _lastNumber = event));
+    stream
+        .listen((event) => setState(() => _lastNumber = event))
+        .onError((error) => setState(() => _lastNumber = -1));
 
     super.initState();
   }
@@ -78,5 +80,6 @@ class _StreamDemoHomePageState extends State<StreamDemoHomePage> {
     Random random = Random();
     int num = random.nextInt(100);
     _numberStream.addNumberToSink(num);
+    // _numberStream.addError();
   }
 }
