@@ -9,10 +9,12 @@ class ShapeAnimation extends StatefulWidget {
 
 class _ShapeAnimationState extends State<ShapeAnimation> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _animationTop;
-  late Animation<double> _animationLeft;
+  late Animation<double> _animation;
   late double _posTop = 0;
   late double _posLeft = 0;
+  double maxTop = 0;
+  double maxLeft = 0;
+  final int ballSize = 100;
 
   @override
   void initState() {
@@ -21,10 +23,9 @@ class _ShapeAnimationState extends State<ShapeAnimation> with SingleTickerProvid
       vsync: this,
       duration: const Duration(seconds: 3),
     );
-    _animationTop = Tween<double>(begin: 0, end: 300)
-        .animate(_controller)
-      ..addListener(() => _moveBall());
-    _animationLeft = Tween<double>(begin: 0, end: 150).animate(_controller);
+
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut,);
+    _animation.addListener(() => _moveBall());
   }
 
   @override
@@ -48,21 +49,28 @@ class _ShapeAnimationState extends State<ShapeAnimation> with SingleTickerProvid
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          Positioned(
-            left: _posLeft,
-            top: _posTop,
-            child: const Ball(),
-          ),
-        ],
+      body: SafeArea(
+        child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              maxLeft = constraints.maxWidth - ballSize;
+              maxTop = constraints.maxHeight - ballSize;
+              return Stack(
+                children: [
+                  Positioned(
+                    left: _posLeft,
+                    top: _posTop,
+                    child: const Ball(),),
+                ],
+              );
+            }
+        ),
       ),
     );
   }
 
   void _moveBall() => setState(() {
-    _posTop = _animationTop.value;
-    _posLeft = _animationLeft.value;
+    _posTop = _animation.value * maxTop;
+    _posLeft = _animation.value * maxLeft;
   });
 }
 
