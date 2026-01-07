@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'flutter-cookbook-b1fc5.firebasestorage.app',
     measurementId: 'G-9JDT2BJTDP',
   );
+
 }
